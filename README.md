@@ -27,7 +27,7 @@ Companion:  IMG_1234.JPG.json
 ```sh
 python3 fixgptakeout.py [dir]
 ```
-Where `[dir]` is the directory to recursively fix. Right after unarchiving your takeout you can use `"Takeout/Google Photos"`i for example.
+Where `[dir]` is the directory to recursively fix. Right after unarchiving your takeout you can use `"Takeout/Google Photos"` for example.
 
 ## Why this matters
 
@@ -43,5 +43,5 @@ The `%d/%F.json` part specifies that the companion json files will be named exac
 
 ## Posterity
 
-Because Google often changes its API's on a whim, I fully expect this script and the related `exiftool` command not to work at some point in the future. But as of January 2020 it works, so Takeout your photos and use it while you can!
+Because Google often changes its API's on a whim, I fully expect this script and the related `exiftool` command not to work at some point in the future. But as of January 2021 it works, so Takeout your photos and use it while you can!
 
