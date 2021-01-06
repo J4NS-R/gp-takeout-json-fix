@@ -33,3 +33,15 @@ Where `[dir]` is the directory to recursively fix. Right after unarchiving your 
 
 The naming of the companion json files is important because the awesome [ExifTool](https://exiftool.org) project can be used to automatically import the json data as exif data into the relevant media files, but only if the json and media files are named perfectly consistently.
 
+For sake of interest, here is the command that does the exif fix:
+
+```sh
+exiftool -r -d %s -tagsfromfile "%d/%F.json" "-GPSAltitude<GeoDataAltitude" "-GPSLatitude<GeoDataLatitude" "-GPSLatitudeRef<GeoDataLatitude" "-GPSLongitude<GeoDataLongitude" "-GPSLongitudeRef<GeoDataLongitude" "-Keywords<Tags" "-Subject<Tags" "-Caption-Abstract<Description" "-ImageDescription<Description" "-DateTimeOriginal<PhotoTakenTimeTimestamp" -ext '*' -overwrite_original --ext json [dir]
+```
+
+The `%d/%F.json` part specifies that the companion json files will be named exactly the same as the related media files (with a lowercase extension) and `.json` appended to the end.
+
+## Posterity
+
+Because Google often changes its API's on a whim, I fully expect this script and the related `exiftool` command not to work at some point in the future. But as of January 2020 it works, so Takeout your photos and use it while you can!
+
