@@ -5,9 +5,9 @@ import json
 
 
 def jsonrename(item):
-    if item.name == 'metadata.json':
-        return
     data = json.load(open(item.path, 'r'))
+    if 'title' not in data:
+        return # assuming album metadata or similar
     expectedname = data['title']+'.json'
     if item.name != expectedname:
         newname = item.path[:-len(item.name)]+expectedname
