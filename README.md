@@ -31,7 +31,9 @@ Where `[dir]` is the directory to recursively fix. Right after unarchiving your 
 
 ## Why this matters
 
-The naming of the companion json files is important because the awesome [ExifTool](https://exiftool.org) project can be used to automatically import the json data as exif data into the relevant media files, but only if the json and media files are named perfectly consistently.
+### ExifTool
+
+The awesome [ExifTool](https://exiftool.org) project can be used to automatically import the json data as exif data into the relevant media files, but only if the json and media files are named perfectly consistently.
 
 For sake of interest, here is the command that does the exif fix:
 
@@ -40,6 +42,10 @@ exiftool -r -d %s -tagsfromfile "%d/%F.json" "-GPSAltitude<GeoDataAltitude" "-GP
 ```
 
 The `%d/%F.json` part specifies that the companion json files will be named exactly the same as the related media files (with a lowercase extension) and `.json` appended to the end.
+
+### Chevereto
+
+[Chevereto](https://chevereto.com/) is an open-source photo hosting app that has native support for [importing Google Photos Takeout](https://v3-docs.chevereto.com/features/bulk-content-importer.html#importing-from-google-photos) images and parsing the related json files, but obviously only if they are named consistently.
 
 ## Posterity
 
