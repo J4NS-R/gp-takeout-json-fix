@@ -59,15 +59,21 @@ def dedupe_albums(parentpath):
             if not os.path.exists(multialb_path):
                 print('Creating multi-album:', multialb_name)
                 # os.mkdir(multialb_path)
-            for item in items:
-                print('Moving', item.item.path, 'to', multialb_name, end='')
-                # os.rename(item.item.path, multialb_path)
 
+            item_mv = items[0].item
+            print('Moving', item_mv.path, 'to', multialb_name, end='')
+            # os.rename(item_mv.path, multialb_path+'/'+item_mv.name)
+            if os.path.exists(item_mv.path+'.json'):
+                print(' and .json')
+                # os.rename(item_mv.path+'.json', multialb_path+'/'+item_mv.name+'.json')
+            else:
+                print()
+
+            # delete other items of the same hash
+            for item in items[1:]:
+                os.unlink(item.item.path)
                 if os.path.exists(item.item.path+'.json'):
-                    print(' and .json')
-                    # os.rename(item.item.path+'.json', multialb_path)
-                else:
-                    print()
+                    os.unlink(item.item.path+'.json')
 
 
 if __name__ == '__main__':
