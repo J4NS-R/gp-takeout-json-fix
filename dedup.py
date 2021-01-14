@@ -48,11 +48,11 @@ def rmdupes(dirpath):
             thehash = hash_file(item.path)
             if thehash in _hashtbl:
                 print('Deleting duplicate:', item.path, end='')
-                # os.unlink(item)
+                os.unlink(item)
                 json_equiv = item.path + '.json'
                 if os.path.exists(json_equiv):
                     print(' (and .json)')
-                    # os.unlink(json_equiv)
+                    os.unlink(json_equiv)
                 else:
                     print()
 
@@ -65,24 +65,24 @@ def dedupe_albums(parentpath):
             multialb_path = parentpath + '/' + multialb_name
             if not os.path.exists(multialb_path):
                 print('Creating multi-album:', multialb_name)
-                # os.mkdir(multialb_path)
+                os.mkdir(multialb_path)
 
             item_mv = items[0]['item']
             print('Moving', item_mv['path'], 'to', multialb_name, end='')
-            # os.rename(item_mv['path'], multialb_path+'/'+item_mv['name'])
+            os.rename(item_mv['path'], multialb_path+'/'+item_mv['name'])
             if os.path.exists(item_mv['path']+'.json'):
                 print(' (and .json)')
-                # os.rename(item_mv['path']+'.json', multialb_path+'/'+item_mv['name']+'.json')
+                os.rename(item_mv['path']+'.json', multialb_path+'/'+item_mv['name']+'.json')
             else:
                 print()
 
             # delete other items of the same hash
             for item in items[1:]:
                 print('Deleting residual:', item['item']['path'], end='')
-                # os.unlink(item['item']['path'])
+                os.unlink(item['item']['path'])
                 if os.path.exists(item['item']['path']+'.json'):
                     print(' (and .json)')
-                    # os.unlink(item['item']['path']+'.json')
+                    os.unlink(item['item']['path']+'.json')
                 else:
                     print()
 
