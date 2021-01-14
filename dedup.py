@@ -35,7 +35,7 @@ def hash_dir(album):
     for item in os.scandir(album.path):
         if not item.name.endswith('.json'):
             thehash = hash_file(item.path)
-            mediaobj = MediaItem(item.name, item.path, album.name, album.path)
+            mediaobj = MediaItem(item.name, item.path, album.name, album.path).__dict__
             if thehash in _hashtbl:
                 _hashtbl[thehash].append(mediaobj)
             else:
