@@ -61,28 +61,28 @@ def dedupe_albums(parentpath):
     for itemhash in _hashtbl:
         items = _hashtbl[itemhash]
         if len(items) > 1: # this media file is duplicated across multiple albums
-            multialb_name = ' _, '.join([x.album.name for x in items])
+            multialb_name = ' _, '.join([x['album']['name'] for x in items])
             multialb_path = parentpath + '/' + multialb_name
             if not os.path.exists(multialb_path):
                 print('Creating multi-album:', multialb_name)
                 # os.mkdir(multialb_path)
 
-            item_mv = items[0].item
-            print('Moving', item_mv.path, 'to', multialb_name, end='')
-            # os.rename(item_mv.path, multialb_path+'/'+item_mv.name)
-            if os.path.exists(item_mv.path+'.json'):
+            item_mv = items[0]['item']
+            print('Moving', item_mv['path'], 'to', multialb_name, end='')
+            # os.rename(item_mv['path'], multialb_path+'/'+item_mv['name'])
+            if os.path.exists(item_mv['path']+'.json'):
                 print(' (and .json)')
-                # os.rename(item_mv.path+'.json', multialb_path+'/'+item_mv.name+'.json')
+                # os.rename(item_mv['path']+'.json', multialb_path+'/'+item_mv['name']+'.json')
             else:
                 print()
 
             # delete other items of the same hash
             for item in items[1:]:
-                print('Deleting residual:', item.item.path, end='')
-                # os.unlink(item.item.path)
-                if os.path.exists(item.item.path+'.json'):
+                print('Deleting residual:', item['item']['path'], end='')
+                # os.unlink(item['item']['path'])
+                if os.path.exists(item['item']['path']+'.json'):
                     print(' (and .json)')
-                    # os.unlink(item.item.path+'.json')
+                    # os.unlink(item['item']['path']+'.json')
                 else:
                     print()
 
